@@ -1,0 +1,75 @@
+{
+  "entries": [
+    {
+      "id": "4f4e1aea-21ba-4e2e-8383-0695d0c2b79b",
+      "category": "Wohnung",
+      "name": "Kaltmiete",
+      "amount": 950,
+      "interval": "monthly",
+      "partner": "Vermieter",
+      "website": "https://example.com",
+      "startDate": "2025-01-01",
+      "endDate": "",
+      "noticeMonths": 3,
+      "notes": "Monatlich zum 1. fällig"
+    },
+    {
+      "id": "416a71a2-94d2-4390-a76b-94b181e1bafa",
+      "category": "Nebenkosten",
+      "name": "Nebenkosten",
+      "amount": 220,
+      "interval": "monthly",
+      "partner": "Hausverwaltung",
+      "website": "https://example.com",
+      "startDate": "2025-01-01",
+      "endDate": "",
+      "noticeMonths": 0,
+      "notes": "Vorauszahlung"
+    },
+    {
+      "id": "f2a4065e-5533-4a3d-9683-7af07c50487d",
+      "category": "Energie",
+      "name": "Strom",
+      "amount": 89,
+      "interval": "monthly",
+      "partner": "Stromanbieter",
+      "website": "https://example.com",
+      "startDate": "2025-02-01",
+      "endDate": "2027-01-31",
+      "noticeMonths": 1,
+      "notes": ""
+    },
+    {
+      "id": "cca297b8-e838-4574-ab34-52a579398705",
+      "category": "Energie",
+      "name": "Gas",
+      "amount": 76,
+      "interval": "monthly",
+      "partner": "Gasanbieter",
+      "website": "https://example.com",
+      "startDate": "2025-02-01",
+      "endDate": "2026-12-31",
+      "noticeMonths": 1,
+      "notes": ""
+    },
+    {
+      "id": "b6dc338d-c85c-41e7-bfd8-dcafd3e04a60",
+      "category": "Telekommunikation",
+      "name": "Internet",
+      "amount": 44.99,
+      "interval": "monthly",
+      "partner": "Provider",
+      "website": "https://example.com",
+      "startDate": "2025-03-01",
+      "endDate": "2027-02-28",
+      "noticeMonths": 3,
+      "notes": "Glasfaser 250 Mbit"
+    }
+  ],
+  "categories": [
+    "Wohnung",
+    "Nebenkosten",
+    "Energie",
+    "Telekommunikation"
+  ]
+}
