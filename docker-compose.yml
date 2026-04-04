@@ -1,0 +1,14 @@
+services:
+  kosten-ueberblick:
+    image: ghcr.io/gedankenstrom/kosten-ueberblick:latest
+    container_name: kosten-ueberblick
+    ports:
+      - "9302:9302"
+    environment:
+      PORT: 9302
+    volumes:
+      - kosten_ueberblick_data:/app/data
+    restart: unless-stopped
+
+volumes:
+  kosten_ueberblick_data:
