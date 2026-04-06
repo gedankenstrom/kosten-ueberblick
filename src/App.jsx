@@ -181,6 +181,7 @@ function App() {
         setEntries(nextEntries)
         setCategories(nextCategories)
         setSelectedCategories(nextCategories)
+        setPersonCount(typeof data.personCount === 'number' ? data.personCount : 1)
         setForm((current) => ({ ...current, category: nextCategories[0] || 'Wohnung' }))
       } catch {
         setEntries(defaultEntries)
@@ -205,9 +206,10 @@ function App() {
       body: JSON.stringify({
         entries,
         categories: syncedCategories,
+        personCount,
       }),
     }).catch(() => {})
-  }, [entries, categories, loaded])
+  }, [entries, categories, personCount, loaded])
 
   const filteredEntries = useMemo(() => {
     if (!selectedCategories.length) return []

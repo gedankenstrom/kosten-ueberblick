@@ -25,6 +25,7 @@ const defaultState = {
       endDate: '',
       noticeMonths: 3,
       notes: 'Monatlich zum 1. fällig',
+      entryType: 'shared',
     },
     {
       id: crypto.randomUUID(),
@@ -38,6 +39,7 @@ const defaultState = {
       endDate: '',
       noticeMonths: 0,
       notes: 'Vorauszahlung',
+      entryType: 'shared',
     },
     {
       id: crypto.randomUUID(),
@@ -51,6 +53,7 @@ const defaultState = {
       endDate: '2027-01-31',
       noticeMonths: 1,
       notes: '',
+      entryType: 'shared',
     },
     {
       id: crypto.randomUUID(),
@@ -64,6 +67,7 @@ const defaultState = {
       endDate: '2026-12-31',
       noticeMonths: 1,
       notes: '',
+      entryType: 'shared',
     },
     {
       id: crypto.randomUUID(),
@@ -77,9 +81,11 @@ const defaultState = {
       endDate: '2027-02-28',
       noticeMonths: 3,
       notes: 'Glasfaser 250 Mbit',
+      entryType: 'shared',
     },
   ],
   categories: ['Wohnung', 'Nebenkosten', 'Energie', 'Telekommunikation'],
+  personCount: 1,
 }
 
 function ensureState() {
@@ -97,6 +103,7 @@ function readState() {
     return {
       entries: Array.isArray(parsed.entries) ? parsed.entries : defaultState.entries,
       categories: Array.isArray(parsed.categories) ? parsed.categories : defaultState.categories,
+      personCount: typeof parsed.personCount === 'number' ? parsed.personCount : defaultState.personCount,
     }
   } catch {
     return defaultState
