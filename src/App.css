@@ -125,6 +125,8 @@ label,
   display: flex;
   flex-direction: column;
   gap: 6px;
+  justify-content: space-between;
+  min-height: 90px;
 }
 
 .summary-card strong {
