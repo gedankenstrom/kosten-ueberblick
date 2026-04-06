@@ -367,9 +367,9 @@ function App() {
       <header className="hero">
         <div>
           <p className="eyebrow">Kostenüberblick</p>
-          <h1>Wohnen, Energie und Telekommunikation auf einen Blick</h1>
+          <h1>Kostenüberblick</h1>
           <p className="hero-text">
-            Minimal gehalten, schnell erfassbar und flexibel nach Kategorien filterbar.
+            Miete, Energie, Internet & Co. – alles an einem Ort.
           </p>
         </div>
         <div className="summary-grid">
