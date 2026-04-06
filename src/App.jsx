@@ -116,6 +116,14 @@ function toMonthlyAmount(amount, interval) {
   return amount
 }
 
+function toPersonalMonthlyAmount(amount, interval, entryType, personCount) {
+  const monthly = toMonthlyAmount(amount, interval)
+  if (entryType === 'shared' && personCount > 1) {
+    return monthly / personCount
+  }
+  return monthly
+}
+
 function toYearlyAmount(amount, interval) {
   if (interval === 'monthly') return amount * 12
   if (interval === 'quarterly') return amount * 4
@@ -156,6 +164,7 @@ function App() {
   const [editingId, setEditingId] = useState(null)
   const [selectedCategories, setSelectedCategories] = useState(defaultCategories)
   const [selectedEntryType, setSelectedEntryType] = useState('all')
+  const [personCount, setPersonCount] = useState(1)
   const [formOpen, setFormOpen] = useState(false)
   const [newCategory, setNewCategory] = useState('')
   const [showNewCategoryInput, setShowNewCategoryInput] = useState(false)
@@ -215,8 +224,12 @@ function App() {
     const activeContracts = filteredEntries.filter(
       (entry) => !entry.endDate || new Date(entry.endDate) >= new Date(),
     ).length
-    return { monthly, yearly, activeContracts }
-  }, [filteredEntries])
+    const personalMonthly = filteredEntries.reduce(
+      (sum, entry) => sum + toPersonalMonthlyAmount(entry.amount, entry.interval, entry.entryType, personCount),
+      0
+    )
+    return { monthly, yearly, activeContracts, personalMonthly }
+  }, [filteredEntries, personCount])
 
   const byCategory = useMemo(() => {
     return categories
@@ -366,6 +379,10 @@ function App() {
             <span>Jährlich</span>
             <strong>{currency.format(summary.yearly)}</strong>
           </article>
+          <article className="summary-card highlight">
+            <span>Dein Anteil ({personCount} Pers.)</span>
+            <strong>{currency.format(summary.personalMonthly)}</strong>
+          </article>
           <article className="summary-card">
             <span>Gefilterte Verträge</span>
             <strong>{summary.activeContracts}</strong>
@@ -477,6 +494,34 @@ function App() {
                 Persönlich
               </button>
             </div>
+          </div>
+
+          <div className="control-block">
+            <div className="panel-head">
+              <h2>Personen</h2>
+              <span className="muted">Für Kostenaufteilung</span>
+            </div>
+            <div className="person-count-row">
+              <button
+                type="button"
+                className="ghost-button"
+                onClick={() => setPersonCount(Math.max(1, personCount - 1))}
+                disabled={personCount <= 1}
+              >
+                −
+              </button>
+              <span className="person-count">{personCount} {personCount === 1 ? 'Person' : 'Personen'}</span>
+              <button
+                type="button"
+                className="ghost-button"
+                onClick={() => setPersonCount(personCount + 1)}
+              >
+                +
+              </button>
+            </div>
+            <p className="manage-hint">
+              Geteilte Kosten werden durch {personCount} geteilt.
+            </p>
           </div>
 
           <div className="control-block form-block">

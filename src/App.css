@@ -99,8 +99,14 @@ label,
 
 .summary-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 12px;
+}
+
+@media (max-width: 900px) {
+  .summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .summary-card,
@@ -128,6 +134,15 @@ label,
 
 .summary-card.accent {
   background: rgba(255, 255, 255, 0.9);
+}
+
+.summary-card.highlight {
+  background: rgba(0, 113, 227, 0.12);
+  border: 1px solid rgba(0, 113, 227, 0.2);
+}
+
+.summary-card.highlight strong {
+  color: #0071e3;
 }
 
 .panel {
@@ -480,4 +495,18 @@ textarea:focus {
     flex-direction: column;
     align-items: flex-start;
   }
+}
+
+.person-count-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.person-count {
+  font-weight: 600;
+  font-size: 1.1rem;
+  min-width: 100px;
+  text-align: center;
 }
