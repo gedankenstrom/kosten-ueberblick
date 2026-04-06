@@ -366,7 +366,6 @@ function App() {
     <div className="app-shell">
       <header className="hero">
         <div>
-          <p className="eyebrow">Übersicht</p>
           <h1>Kostenüberblick</h1>
           <p className="hero-text">
             Miete, Energie, Internet & Co. – alles an einem Ort.
