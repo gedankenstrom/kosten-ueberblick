@@ -103,12 +103,6 @@ label,
   gap: 12px;
 }
 
-@media (min-width: 900px) {
-  .summary-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
 @media (max-width: 600px) {
   .summary-grid {
     grid-template-columns: 1fr;
