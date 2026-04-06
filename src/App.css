@@ -43,10 +43,16 @@ a:hover {
 
 .hero {
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 16px;
+  grid-template-columns: 360px 1fr;
+  gap: 18px;
   align-items: end;
   margin-bottom: 18px;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
 }
 
 .eyebrow {
@@ -101,6 +107,7 @@ label,
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
+  width: 100%;
 }
 
 @media (max-width: 600px) {
