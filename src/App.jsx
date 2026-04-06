@@ -23,6 +23,7 @@ const defaultEntries = [
     endDate: '',
     noticeMonths: 3,
     notes: 'Monatlich zum 1. fällig',
+    entryType: 'shared',
   },
   {
     id: createId(),
@@ -36,6 +37,7 @@ const defaultEntries = [
     endDate: '',
     noticeMonths: 0,
     notes: 'Vorauszahlung',
+    entryType: 'shared',
   },
   {
     id: createId(),
@@ -49,6 +51,7 @@ const defaultEntries = [
     endDate: '2027-01-31',
     noticeMonths: 1,
     notes: '',
+    entryType: 'shared',
   },
   {
     id: createId(),
@@ -62,6 +65,7 @@ const defaultEntries = [
     endDate: '2026-12-31',
     noticeMonths: 1,
     notes: '',
+    entryType: 'shared',
   },
   {
     id: createId(),
@@ -75,6 +79,7 @@ const defaultEntries = [
     endDate: '2027-02-28',
     noticeMonths: 3,
     notes: 'Glasfaser 250 Mbit',
+    entryType: 'shared',
   },
 ]
 
@@ -89,6 +94,7 @@ const emptyForm = {
   endDate: '',
   noticeMonths: 0,
   notes: '',
+  entryType: 'shared',
 }
 
 const intervalLabels = {
@@ -149,6 +155,7 @@ function App() {
   const [form, setForm] = useState({ ...emptyForm, category: defaultCategories[0] })
   const [editingId, setEditingId] = useState(null)
   const [selectedCategories, setSelectedCategories] = useState(defaultCategories)
+  const [selectedEntryType, setSelectedEntryType] = useState('all')
   const [formOpen, setFormOpen] = useState(false)
   const [newCategory, setNewCategory] = useState('')
   const [showNewCategoryInput, setShowNewCategoryInput] = useState(false)
@@ -195,8 +202,12 @@ function App() {
 
   const filteredEntries = useMemo(() => {
     if (!selectedCategories.length) return []
-    return entries.filter((entry) => selectedCategories.includes(entry.category))
-  }, [entries, selectedCategories])
+    return entries.filter((entry) => {
+      const categoryMatch = selectedCategories.includes(entry.category)
+      const typeMatch = selectedEntryType === 'all' || entry.entryType === selectedEntryType
+      return categoryMatch && typeMatch
+    })
+  }, [entries, selectedCategories, selectedEntryType])
 
   const summary = useMemo(() => {
     const monthly = filteredEntries.reduce((sum, entry) => sum + toMonthlyAmount(entry.amount, entry.interval), 0)
@@ -439,6 +450,35 @@ function App() {
             )}
           </div>
 
+          <div className="control-block">
+            <div className="panel-head">
+              <h2>Typ</h2>
+            </div>
+            <div className="filter-chips">
+              <button
+                type="button"
+                className={`chip ${selectedEntryType === 'all' ? 'active' : ''}`}
+                onClick={() => setSelectedEntryType('all')}
+              >
+                Alle
+              </button>
+              <button
+                type="button"
+                className={`chip ${selectedEntryType === 'shared' ? 'active' : ''}`}
+                onClick={() => setSelectedEntryType('shared')}
+              >
+                Geteilt
+              </button>
+              <button
+                type="button"
+                className={`chip ${selectedEntryType === 'personal' ? 'active' : ''}`}
+                onClick={() => setSelectedEntryType('personal')}
+              >
+                Persönlich
+              </button>
+            </div>
+          </div>
+
           <div className="control-block form-block">
             <div className="panel-head">
               <h2>{editingId ? 'Eintrag bearbeiten' : 'Eintrag hinzufügen'}</h2>
@@ -526,6 +566,14 @@ function App() {
               </label>
 
               <label>
+                Art
+                <select name="entryType" value={form.entryType} onChange={handleChange}>
+                  <option value="shared">Geteilt</option>
+                  <option value="personal">Persönlich</option>
+                </select>
+              </label>
+
+              <label>
                 Vertragspartner
                 <input name="partner" value={form.partner} onChange={handleChange} placeholder="z. B. Vattenfall" />
               </label>
@@ -601,7 +649,11 @@ function App() {
                   <article key={entry.id} className="contract-card">
                     <div className="card-top">
                       <div>
-                        <p className="category-tag">{entry.category}</p>
+                        <div className="tags-row">
+                          <span className="category-tag">{entry.category}</span>
+                          {entry.entryType === 'personal' && <span className="type-tag personal">Persönlich</span>}
+                          {entry.entryType === 'shared' && <span className="type-tag shared">Geteilt</span>}
+                        </div>
                         <h3>{entry.name}</h3>
                       </div>
                       <div className={`status-pill ${status.tone}`}>{status.label}</div>

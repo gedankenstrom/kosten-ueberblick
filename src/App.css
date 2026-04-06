@@ -331,14 +331,34 @@ textarea:focus {
   margin-bottom: 12px;
 }
 
-.category-tag {
+.tags-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.category-tag,
+.type-tag {
   display: inline-flex;
   padding: 6px 10px;
   border-radius: 999px;
+  font-size: 0.78rem;
+}
+
+.category-tag {
   background: rgba(17, 24, 39, 0.06);
   color: #6b7280;
-  font-size: 0.78rem;
-  margin-bottom: 8px;
+}
+
+.type-tag.shared {
+  background: rgba(0, 113, 227, 0.1);
+  color: #0071e3;
+}
+
+.type-tag.personal {
+  background: rgba(120, 53, 15, 0.1);
+  color: #78350f;
 }
 
 .status-pill {
