@@ -45,8 +45,12 @@ a:hover {
   display: grid;
   grid-template-columns: 360px 1fr;
   gap: 18px;
-  align-items: end;
+  align-items: start;
   margin-bottom: 18px;
+}
+
+.hero > div:first-child {
+  padding-top: 8px;
 }
 
 @media (max-width: 900px) {
