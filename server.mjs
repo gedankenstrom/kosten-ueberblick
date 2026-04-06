@@ -159,6 +159,7 @@ const server = http.createServer((req, res) => {
         const nextState = {
           entries: Array.isArray(parsed.entries) ? parsed.entries : [],
           categories: Array.isArray(parsed.categories) ? parsed.categories : [],
+          personCount: typeof parsed.personCount === 'number' ? parsed.personCount : 1,
         }
         writeState(nextState)
         sendJson(res, 200, { ok: true })
